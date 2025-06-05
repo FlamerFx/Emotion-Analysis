@@ -104,6 +104,11 @@ Enter your text when prompted and see the predicted emotion.
 
 ---
 
+## 📸 Screenshot
+
+![Main Window Screenshot](cpp_client/screenshot.png)
+
+
 ## 🛠️ Troubleshooting
 
 - **TensorFlow include error in C++:**  
