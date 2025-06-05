@@ -1,28 +1,36 @@
 cmake_minimum_required(VERSION 3.10)
 project(tf_cpp_client)
 
-# Use C++14 standard
 set(CMAKE_CXX_STANDARD 14)
 
-# Include directories for header files
+include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/imgui)
+# Add GLFW include if needed:
+# include_directories(${CMAKE_SOURCE_DIR}/third_party/glfw/include)
 
-# Link directories for external libraries
+link_directories(${CMAKE_SOURCE_DIR})
 link_directories(${CMAKE_SOURCE_DIR}/lib)
+# link_directories(${CMAKE_SOURCE_DIR}/third_party/glfw/lib-vc2022) # If using local GLFW
 
-# Add your source files here
-add_executable(main
+add_executable(gui_main
     main.cpp
     TextPreprocessor.cpp
     LabelUtils.cpp
+    imgui.cpp
+    imgui_draw.cpp
+    imgui_tables.cpp
+    imgui_widgets.cpp
+    imgui_impl_glfw.cpp
+    imgui_impl_opengl3.cpp
 )
 
-# Link TensorFlow library
-target_link_libraries(main tensorflow)
+# Link with TensorFlow, GLFW, and OpenGL
+target_link_libraries(gui_main tensorflow glfw3 opengl32)
 
-# After build, copy the TensorFlow DLL to the output directory (for Windows runtime)
-add_custom_command(TARGET main POST_BUILD
+# Optional: Copy DLL to build dir
+add_custom_command(TARGET gui_main POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${CMAKE_SOURCE_DIR}/lib/tensorflow.dll"
-        $<TARGET_FILE_DIR:main>
+        $<TARGET_FILE_DIR:gui_main>
 )

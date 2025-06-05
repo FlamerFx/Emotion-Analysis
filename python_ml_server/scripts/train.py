@@ -118,22 +118,3 @@ print(f"Model exported to TensorFlow Lite format at {TFLITE_MODEL_PATH}")
 print("Exporting model as TensorFlow SavedModel for C/C++ API...")
 model.export(SAVED_MODEL_PATH)
 print(f"Model exported as TensorFlow SavedModel at {SAVED_MODEL_PATH}")
-
-import os
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_DIR = os.path.join(BASE_DIR, "model")
-
-@st.cache_resource
-def load_assets():
-    model = tf.keras.models.load_model(os.path.join(MODEL_DIR, "model.keras"))
-    with open(os.path.join(MODEL_DIR, "tokenizer.pkl"), "rb") as f:
-        tokenizer = pickle.load(f)
-    with open(os.path.join(MODEL_DIR, "label_encoder.pkl"), "rb") as f:
-        label_encoder = pickle.load(f)
-    return model, tokenizer, label_encoder
-
-if st.session_state.page == "welcome":
-    lottie_hello = load_lottiefile(os.path.join(MODEL_DIR, "Hello Animation.json"))
-    st_lottie(lottie_hello, speed=1, width=300, height=300, key="hello")
-    st.image(os.path.join(MODEL_DIR, "Herta.png"), width=200)

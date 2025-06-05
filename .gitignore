@@ -1,0 +1,44 @@
+# Python cache and build files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Build and distribution folders
+build/
+dist/
+build_vs/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# C++ build artifacts
+*.exe
+*.out
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Visual Studio files
+.vscode/
+.vs/
+*.vcxproj*
+*.sln
+
+# TensorFlow C library and headers (users must add these themselves)
+cpp_client/include/
+cpp_client/lib/
